@@ -7,7 +7,8 @@ import { ErfassungPage } from "../pages/erfassung/erfassung";
 import { UebersichtPage } from "../pages/uebersicht/uebersicht";
 import { EinstellungenPage } from '../pages/einstellungen/einstellungen';
 import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
+
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -18,8 +19,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ErfassungPage,
     UebersichtPage,
     EinstellungenPage,
-    HomePage,
-    TabsPage
+    HomePage
   ],
   imports: [
     BrowserModule,
@@ -31,13 +31,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ErfassungPage,
     UebersichtPage,
     EinstellungenPage,
-    HomePage,
-    TabsPage
+    HomePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    FingerprintAIO
   ]
 })
 export class AppModule {}
