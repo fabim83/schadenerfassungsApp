@@ -5,9 +5,9 @@
 </ion-header>
 
 <ion-content>
-  <div padding style="margin-top: 10px">
-    <h2>Schadenerfassungsapp</h2>
-    <p>
+  <div padding style="margin-top: 15px">
+    <h2 ion-text color="primary">Schadenerfassungsapp</h2>
+    <p ion-text color="primary">
       Herzlich Willkommen in der Schadenerfassungsapp! <br/><br/> Über die Tabs im unteren Bereich ihres Smartphones
       können Sie durch die einzelnen Seiten navigieren, um so einen neuen Schaden zu erfassen, eine Übersicht über 
       Ihre bisher erfassten Schäden zu erhalten und Ihre Einstellungen zu verändern.
@@ -15,8 +15,8 @@
   </div>
   <p style="margin-top: 5px">
     <ion-list>
-      <button ion-item (click)="kontaktSelected()">Kontakt</button>  
-      <button ion-item (click)="aboutSelected()">Über uns</button>  
+      <button ion-item (click)="kontaktSelected()" color="primary">Kontakt</button>  
+      <button ion-item (click)="aboutSelected()" color="primary">Über uns</button>  
     </ion-list>
   </p>
 </ion-content>

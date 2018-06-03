@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ErfassungDetailPage } from '../erfassung-detail/erfassung-detail';
+import { IonicPage, NavController } from 'ionic-angular';
+import { Storage } from "@ionic/storage";
 
 @IonicPage()
 @Component({
@@ -8,10 +8,12 @@ import { ErfassungDetailPage } from '../erfassung-detail/erfassung-detail';
   templateUrl: 'erfassung.html',
 })
 export class ErfassungPage {
-  sachgebiete: any[];
+  sachgebiete = [];
+  schadenarten = [];
+  schadenmelder = [];
+  schaden = {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.sachgebiete = [];
+  constructor(public navCtrl: NavController, public storage: Storage) {
 
     this.sachgebiete.push({
       name: 'Kraftfahrt',
@@ -28,12 +30,35 @@ export class ErfassungPage {
       id: 'H'
     });
 
+    this.schadenarten.push({
+      name: 'Leitungswasser',
+      id: 'LW'
+    });
+    this.schadenarten.push({
+      name: 'Hagel',
+      id: 'HG'
+    });
+    this.schadenarten.push({
+      name: 'Glas',
+      id: 'GL'
+    });
+
+    this.schadenmelder.push({
+      name: 'Versicherungsnehmer',
+      id: 'VN'
+    });
+
+    this.schadenmelder.push({
+      name: 'Sonstiges',
+      id: 'SO'
+    });
   }
 
-  sachgebietSelected(sachgebiet) {
-    this.navCtrl.push(ErfassungDetailPage, {
-      sachgebiet: sachgebiet
+  schadenErfassen () {
+    this.storage.length().then((anzahl) => {
+      this.storage.set((anzahl + 1).toString(), this.schaden);
     });
+    //this.navCtrl.parent.select('page-uebersicht');
   }
 
 }

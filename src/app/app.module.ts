@@ -5,13 +5,15 @@ import { MyApp } from './app.component';
 
 import { ErfassungPage } from "../pages/erfassung/erfassung";
 import { UebersichtPage } from "../pages/uebersicht/uebersicht";
+import { UebersichtDetailsPage } from "../pages/uebersicht-details/uebersicht-details";
 import { EinstellungenPage } from '../pages/einstellungen/einstellungen';
 import { HomePage } from '../pages/home/home';
-import { ErfassungDetailPage } from "../pages/erfassung-detail/erfassung-detail";
 import { AboutPage } from "../pages/about/about";
 import { KontaktPage } from "../pages/kontakt/kontakt";
 
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
+import { IonicStorageModule } from '@ionic/storage';
+import { HttpModule } from "@angular/http";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -21,24 +23,26 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     ErfassungPage,
     UebersichtPage,
+    UebersichtDetailsPage,
     EinstellungenPage,
     HomePage,
-    ErfassungDetailPage,
     AboutPage,
     KontaktPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    HttpModule,
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     ErfassungPage,
     UebersichtPage,
+    UebersichtDetailsPage,
     EinstellungenPage,
     HomePage,
-    ErfassungDetailPage,
     AboutPage,
     KontaktPage
   ],

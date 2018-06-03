@@ -3,18 +3,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-erfassung-detail',
-  templateUrl: 'erfassung-detail.html',
+  selector: 'page-uebersicht-details',
+  templateUrl: 'uebersicht-details.html',
 })
-export class ErfassungDetailPage {
-  sachgebiet: any;
+export class UebersichtDetailsPage {
+  schaden: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.sachgebiet = navParams.get('sachgebiet');
+    this.schaden = this.navParams.get('schaden');
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ErfassungDetailPage');
+    console.log('ionViewDidLoad UebersichtDetailsPage');
   }
 
 }
