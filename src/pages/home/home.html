@@ -4,14 +4,19 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Schadenerfassungsapp</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
+<ion-content>
+  <div padding style="margin-top: 10px">
+    <h2>Schadenerfassungsapp</h2>
+    <p>
+      Herzlich Willkommen in der Schadenerfassungsapp! <br/><br/> Über die Tabs im unteren Bereich ihres Smartphones
+      können Sie durch die einzelnen Seiten navigieren, um so einen neuen Schaden zu erfassen, eine Übersicht über 
+      Ihre bisher erfassten Schäden zu erhalten und Ihre Einstellungen zu verändern.
+    </p>
+  </div>
+  <p style="margin-top: 5px">
+    <ion-list>
+      <button ion-item (click)="kontaktSelected()">Kontakt</button>  
+      <button ion-item (click)="aboutSelected()">Über uns</button>  
+    </ion-list>
   </p>
 </ion-content>

@@ -7,6 +7,9 @@ import { ErfassungPage } from "../pages/erfassung/erfassung";
 import { UebersichtPage } from "../pages/uebersicht/uebersicht";
 import { EinstellungenPage } from '../pages/einstellungen/einstellungen';
 import { HomePage } from '../pages/home/home';
+import { ErfassungDetailPage } from "../pages/erfassung-detail/erfassung-detail";
+import { AboutPage } from "../pages/about/about";
+import { KontaktPage } from "../pages/kontakt/kontakt";
 
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 
@@ -19,7 +22,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ErfassungPage,
     UebersichtPage,
     EinstellungenPage,
-    HomePage
+    HomePage,
+    ErfassungDetailPage,
+    AboutPage,
+    KontaktPage
   ],
   imports: [
     BrowserModule,
@@ -31,7 +37,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ErfassungPage,
     UebersichtPage,
     EinstellungenPage,
-    HomePage
+    HomePage,
+    ErfassungDetailPage,
+    AboutPage,
+    KontaktPage
   ],
   providers: [
     StatusBar,
