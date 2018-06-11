@@ -12,8 +12,8 @@ import { AboutPage } from "../pages/about/about";
 import { KontaktPage } from "../pages/kontakt/kontakt";
 
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
+import { HTTP } from "@ionic-native/http";
 import { IonicStorageModule } from '@ionic/storage';
-import { HttpModule } from "@angular/http";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,7 +31,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
@@ -50,7 +49,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FingerprintAIO
+    FingerprintAIO,
+    HTTP
   ]
 })
 export class AppModule {}

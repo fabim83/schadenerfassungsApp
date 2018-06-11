@@ -6,17 +6,23 @@
 
 <ion-content>
   <div padding style="margin-top: 15px">
-    <h2 ion-text color="primary">Schadenerfassungsapp</h2>
+    <h2 ion-text color="primary">SchadenerfassungsApp</h2>
     <p ion-text color="primary">
       Herzlich Willkommen in der Schadenerfassungsapp! <br/><br/> Über die Tabs im unteren Bereich ihres Smartphones
       können Sie durch die einzelnen Seiten navigieren, um so einen neuen Schaden zu erfassen, eine Übersicht über 
       Ihre bisher erfassten Schäden zu erhalten und Ihre Einstellungen zu verändern.
     </p>
   </div>
-  <p style="margin-top: 5px">
+  <!-- <p style="margin-top: 5px">
     <ion-list>
       <button ion-item (click)="kontaktSelected()" color="primary">Kontakt</button>  
       <button ion-item (click)="aboutSelected()" color="primary">Über uns</button>  
     </ion-list>
-  </p>
+  </p> -->
+  <ion-fab left middle>
+    <button ion-fab (click)="kontaktSelected()" color="primary"><ion-icon name="contact"></ion-icon></button>
+  </ion-fab>
+  <ion-fab right middle>
+    <button ion-fab (click)="aboutSelected()" color="primary"><ion-icon name="card"></ion-icon></button>
+  </ion-fab>
 </ion-content>

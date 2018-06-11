@@ -28,4 +28,8 @@ export class LoginPage {
   ionViewDidEnter() {
     this.login();
   }
+
+  loginTest() {
+    this.navCtrl.setRoot('TabsPage');
+  }
 }

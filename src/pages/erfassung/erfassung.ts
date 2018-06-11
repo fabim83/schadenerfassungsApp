@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { Storage } from "@ionic/storage";
+import { HTTP } from "@ionic-native/http";
 
 @IonicPage()
 @Component({
@@ -13,7 +14,7 @@ export class ErfassungPage {
   schadenmelder = [];
   schaden = {};
 
-  constructor(public navCtrl: NavController, public storage: Storage) {
+  constructor(public navCtrl: NavController, public storage: Storage, private toastCtrl: ToastController, private http: HTTP) {
 
     this.sachgebiete.push({
       name: 'Kraftfahrt',
@@ -55,10 +56,32 @@ export class ErfassungPage {
   }
 
   schadenErfassen () {
-    this.storage.length().then((anzahl) => {
-      this.storage.set((anzahl + 1).toString(), this.schaden);
-    });
-    //this.navCtrl.parent.select('page-uebersicht');
+    this.http.post('http://192.168.2.100:3000/schaden-anlegen', this.schaden, {
+      'Content-Type': 'application/json'
+    })
+    .then(data => {
+      let toast = this.toastCtrl.create({
+        message: 'Schaden erfolgreich erfasst.',
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+
+      this.storage.length().then((anzahl) => {
+        this.storage.set((anzahl + 1).toString(), this.schaden);
+      });
+    })
+    .catch(err => {
+      let toast = this.toastCtrl.create({
+        message: JSON.stringify(err),
+        duration: 20000,
+        position: 'top'
+      });
+      toast.present();
+    })  
+
+    this.schaden = {};
+    this.navCtrl.parent.select(2);
   }
 
 }
