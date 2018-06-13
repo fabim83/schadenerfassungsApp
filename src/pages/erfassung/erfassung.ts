@@ -73,7 +73,7 @@ export class ErfassungPage {
     })
     .catch(err => {
       let toast = this.toastCtrl.create({
-        message: JSON.stringify(err),
+        message: err.error,
         duration: 20000,
         position: 'top'
       });

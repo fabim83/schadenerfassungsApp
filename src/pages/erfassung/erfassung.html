@@ -10,38 +10,42 @@
 <ion-content>
   <form (ngSubmit)="schadenErfassen()" style="margin-top: 15px">
       <ion-item>
-          <ion-label color="primary">Sachgebiet</ion-label>
+          <ion-label color="primary" stacked>Sachgebiet</ion-label>
           <ion-select [(ngModel)]="schaden.sachgebiet" name="sachgebiet" interface="action-sheet" cancelText="Abbrechen">
             <ion-option *ngFor="let sachgebiet of sachgebiete" [value]="sachgebiet.id">{{sachgebiet.name}}</ion-option>
           </ion-select>
         </ion-item>
       <ion-item>
-        <ion-label color="primary">Schadenart</ion-label>
+        <ion-label color="primary" stacked>Schadenart</ion-label>
         <ion-select [(ngModel)]="schaden.schadenart" name="schadenart" interface="action-sheet" cancelText="Abbrechen">
           <ion-option *ngFor="let schadenart of schadenarten" [value]="schadenart.id">{{schadenart.name}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label color="primary">Schadendatum</ion-label>
+        <ion-label color="primary" stacked>Schadendatum</ion-label>
         <ion-datetime displayFormat="DD MMMM YYYY" [(ngModel)]="schaden.schadendatum" name="schadendatum" cancelText="Abbrechen" doneText="Fertig" monthNames= "Januar, Februar, M\u00e4rz, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember"></ion-datetime>
       </ion-item>
       <ion-item>
-          <ion-label color="primary">Schadenuhrzeit</ion-label>
+          <ion-label color="primary" stacked>Schadenuhrzeit</ion-label>
           <ion-datetime displayFormat="HH:mm" [(ngModel)]="schaden.schadenuhrzeit" name="schadenuhrzeit" cancelText="Abbrechen" doneText="Fertig" minuteValues="0,15,30,45"></ion-datetime>
       </ion-item>
       <ion-item>
-          <ion-label color="primary">Schademelder</ion-label>
+          <ion-label color="primary" stacked>Schademelder</ion-label>
           <ion-select [(ngModel)]="schaden.schadenmelder" name="schadenmelder" interface="action-sheet" cancelText="Abbrechen">
             <ion-option *ngFor="let melder of schadenmelder" [value]="melder.id">{{melder.name}}</ion-option>
           </ion-select>
       </ion-item>
       <ion-item>
-          <ion-label color="primary">Vertragsnummer</ion-label>
+          <ion-label color="primary" stacked>Vertragsnummer</ion-label>
           <ion-input type="text" max="11" min="11" [(ngModel)]="schaden.vertragsnummer" name="vertragsnummer"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label color="primary">Schadennotizen</ion-label>
-        <ion-textarea rows="5" [(ngModel)]="schaden.schadennotizen" name="schadennotizen"></ion-textarea>
+          <ion-label color="primary" stacked>Name Versicherungsnehmer</ion-label>
+          <ion-input type="text" [(ngModel)]="schaden.nameVN" name="nameVN"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" stacked>Schadennotizen</ion-label>
+        <ion-textarea rows="10" [(ngModel)]="schaden.schadennotizen" name="schadennotizen"></ion-textarea>
       </ion-item>
       <button ion-button type="submit" block>SCHADEN ERFASSEN</button>
   </form> 
