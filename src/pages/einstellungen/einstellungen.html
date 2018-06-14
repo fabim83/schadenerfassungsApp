@@ -7,8 +7,30 @@
 </ion-header>
 
 
-<ion-content padding>
-<!--
-  Z.B.: Speicherzeit der erfassten Schäden in der Übersicht
--->
+<ion-content>
+    <ion-item style="margin-top: 15px">
+        <ion-label color="primary" stacked>Anzeigedauer Schadenübersicht</ion-label>
+        <ion-select [(ngModel)]="anzeigedauer" interface="action-sheet" cancelText="Abbrechen">
+          <ion-option value="-1">Immer</ion-option>
+          <ion-option value="1">1 Tag</ion-option>
+          <ion-option value="2">2 Tage</ion-option>
+          <ion-option value="3">3 Tage</ion-option>
+          <ion-option value="4">4 Tage</ion-option>
+          <ion-option value="5">5 Tage</ion-option>
+          <ion-option value="6">6 Tage</ion-option>
+          <ion-option value="7">7 Tage</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary" stacked>Authentifizierungsdaten Schadenerfassung</ion-label>
+        <ion-input type="text" [(ngModel)]="kennung" name="kennung" placeholder="Kennung"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label stacked></ion-label>
+        <ion-input type="password" [(ngModel)]="passwort" name="passwort" placeholder="Passwort"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label stacked></ion-label>
+        <ion-input type="text" [(ngModel)]="bestandskontonummer" name="bestandskontonummer" placeholder="Bestandskontonummer"></ion-input>
+    </ion-item>
 </ion-content>

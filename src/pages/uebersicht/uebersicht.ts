@@ -11,7 +11,7 @@ import { UebersichtDetailsPage } from '../uebersicht-details/uebersicht-details'
 export class UebersichtPage {
   schaeden = [];
 
-  constructor(public navCtrl: NavController, public storage: Storage) {
+  constructor(public navCtrl: NavController, private storage: Storage) {
 
   }
 

@@ -11,7 +11,7 @@
   <form (ngSubmit)="schadenErfassen()" style="margin-top: 15px">
       <ion-item>
           <ion-label color="primary" stacked>Sachgebiet</ion-label>
-          <ion-select [(ngModel)]="schaden.sachgebiet" name="sachgebiet" interface="action-sheet" cancelText="Abbrechen">
+          <ion-select [(ngModel)]="schaden.sachgebiet" (ionChange)="setzeSchadenarten($event)" name="sachgebiet" interface="action-sheet" cancelText="Abbrechen">
             <ion-option *ngFor="let sachgebiet of sachgebiete" [value]="sachgebiet.id">{{sachgebiet.name}}</ion-option>
           </ion-select>
         </ion-item>

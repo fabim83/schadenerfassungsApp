@@ -13,8 +13,4 @@ export class UebersichtDetailsPage {
     this.schaden = this.navParams.get('schaden');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UebersichtDetailsPage');
-  }
-
 }
