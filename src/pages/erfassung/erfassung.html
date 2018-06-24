@@ -8,44 +8,65 @@
 
 
 <ion-content>
-  <form (ngSubmit)="schadenErfassen()" style="margin-top: 15px">
+  <form (ngSubmit)="schadenErfassen()" [formGroup]="erfassungForm" style="margin-top: 15px">
       <ion-item>
           <ion-label color="primary" stacked>Sachgebiet</ion-label>
-          <ion-select [(ngModel)]="schaden.sachgebiet" (ionChange)="setzeSchadenarten($event)" name="sachgebiet" interface="action-sheet" cancelText="Abbrechen">
+          <ion-select formControlName="sachgebiet" (ionChange)="setzeSchadenarten($event)" interface="action-sheet" cancelText="Abbrechen">
             <ion-option *ngFor="let sachgebiet of sachgebiete" [value]="sachgebiet.id">{{sachgebiet.name}}</ion-option>
           </ion-select>
-        </ion-item>
+      </ion-item>
+      <ion-item *ngIf="!erfassungForm.controls.sachgebiet.valid && (erfassungForm.controls.sachgebiet.dirty || submitAttempt)">
+          <p style="color: #ea6153;">Bitte ein Sachgebiet auswählen!</p>
+      </ion-item>
       <ion-item>
         <ion-label color="primary" stacked>Schadenart</ion-label>
-        <ion-select [(ngModel)]="schaden.schadenart" name="schadenart" interface="action-sheet" cancelText="Abbrechen">
+        <ion-select formControlName="schadenart" interface="action-sheet" cancelText="Abbrechen">
           <ion-option *ngFor="let schadenart of schadenarten" [value]="schadenart.id">{{schadenart.name}}</ion-option>
         </ion-select>
       </ion-item>
+      <ion-item *ngIf="!erfassungForm.controls.schadenart.valid && (erfassungForm.controls.schadenart.dirty || submitAttempt)">
+          <p style="color: #ea6153;">Bitte eine Schadenart auswählen!</p>
+      </ion-item>
       <ion-item>
         <ion-label color="primary" stacked>Schadendatum</ion-label>
-        <ion-datetime displayFormat="DD MMMM YYYY" [(ngModel)]="schaden.schadendatum" name="schadendatum" cancelText="Abbrechen" doneText="Fertig" monthNames= "Januar, Februar, M\u00e4rz, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember"></ion-datetime>
+        <ion-datetime displayFormat="DD MMMM YYYY" formControlName="schadendatum" cancelText="Abbrechen" doneText="Fertig" monthNames= "Januar, Februar, M\u00e4rz, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember"></ion-datetime>
+      </ion-item>
+      <ion-item *ngIf="!erfassungForm.controls.schadendatum.valid && (erfassungForm.controls.schadendatum.dirty || submitAttempt)">
+          <p style="color: #ea6153;">Bitte ein Schadendatum auswählen!</p>
       </ion-item>
       <ion-item>
           <ion-label color="primary" stacked>Schadenuhrzeit</ion-label>
-          <ion-datetime displayFormat="HH:mm" [(ngModel)]="schaden.schadenuhrzeit" name="schadenuhrzeit" cancelText="Abbrechen" doneText="Fertig" minuteValues="0,15,30,45"></ion-datetime>
+          <ion-datetime displayFormat="HH:mm" formControlName="schadenuhrzeit" cancelText="Abbrechen" doneText="Fertig" minuteValues="0,15,30,45"></ion-datetime>
+      </ion-item>
+      <ion-item *ngIf="!erfassungForm.controls.schadenuhrzeit.valid && (erfassungForm.controls.schadenuhrzeit.dirty || submitAttempt)">
+          <p style="color: #ea6153;">Bitte eine Schadenuhrzeit auswählen!</p>
       </ion-item>
       <ion-item>
           <ion-label color="primary" stacked>Schademelder</ion-label>
-          <ion-select [(ngModel)]="schaden.schadenmelder" name="schadenmelder" interface="action-sheet" cancelText="Abbrechen">
+          <ion-select formControlName="schadenmelder" interface="action-sheet" cancelText="Abbrechen">
             <ion-option *ngFor="let melder of schadenmelder" [value]="melder.id">{{melder.name}}</ion-option>
           </ion-select>
       </ion-item>
+      <ion-item *ngIf="!erfassungForm.controls.schadenmelder.valid && (erfassungForm.controls.schadenmelder.dirty || submitAttempt)">
+          <p style="color: #ea6153;">Bitte einen Schadenmelder auswählen!</p>
+      </ion-item>
       <ion-item>
           <ion-label color="primary" stacked>Vertragsnummer</ion-label>
-          <ion-input type="text" max="11" min="11" [(ngModel)]="schaden.vertragsnummer" name="vertragsnummer"></ion-input>
+          <ion-input formControlName="vertragsnummer" type="text"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!erfassungForm.controls.vertragsnummer.valid && (erfassungForm.controls.vertragsnummer.dirty || submitAttempt)">
+        <p style="color: #ea6153;">Bitte eine gültige Vertragsnummer eingeben!</p>
       </ion-item>
       <ion-item>
           <ion-label color="primary" stacked>Name Versicherungsnehmer</ion-label>
-          <ion-input type="text" [(ngModel)]="schaden.nameVN" name="nameVN"></ion-input>
+          <ion-input formControlName="nameVN" type="text"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!erfassungForm.controls.nameVN.valid && (erfassungForm.controls.nameVN.dirty || submitAttempt)">
+        <p style="color: #ea6153;">Bitte einen gültigen Namen eingeben!</p>
       </ion-item>
       <ion-item>
         <ion-label color="primary" stacked>Schadennotizen</ion-label>
-        <ion-textarea rows="10" [(ngModel)]="schaden.schadennotizen" name="schadennotizen"></ion-textarea>
+        <ion-textarea rows="10" formControlName="schadennotizen"></ion-textarea>
       </ion-item>
       <button ion-button type="submit" block>SCHADEN ERFASSEN</button>
   </form> 

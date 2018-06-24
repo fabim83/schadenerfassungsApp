@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { Storage } from "@ionic/storage";
 import { HTTP } from "@ionic-native/http";
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -14,7 +15,21 @@ export class ErfassungPage {
   schadenmelder = [];
   schaden = {};
 
-  constructor(public navCtrl: NavController, public storage: Storage, private toastCtrl: ToastController, private http: HTTP) {
+  erfassungForm: FormGroup;
+  submitAttempt: boolean = false;
+
+  constructor(public navCtrl: NavController, public storage: Storage, public formBuilder: FormBuilder, private toastCtrl: ToastController, private http: HTTP) {
+
+    this.erfassungForm = formBuilder.group({
+      sachgebiet: ['', Validators.required],
+      schadenart: ['', Validators.required],
+      schadendatum: ['', Validators.required],
+      schadenuhrzeit: ['', Validators.required],
+      schadenmelder: ['', Validators.required],
+      vertragsnummer: ['', Validators.compose([Validators.minLength(10), Validators.maxLength(10), Validators.pattern('[0-9]*'), Validators.required])],
+      nameVN: ['', Validators.compose([Validators.pattern('[a-zA-Z]*'), Validators.required])],
+      schadennotizen: ['']
+    });
 
     this.sachgebiete.push({
       name: 'Kraftfahrt',
@@ -48,9 +63,15 @@ export class ErfassungPage {
   }
 
   schadenErfassen() {
+    this.submitAttempt = true;
+    if (!this.erfassungForm.valid) {
+      this.navCtrl.parent.select(1);
+      return;
+    }
+
     this.storage.get('bestandskontonummer').then((val) => {
       let bestandskontonummer = val;
-      if(!bestandskontonummer){
+      if (!bestandskontonummer) {
         let toast = this.toastCtrl.create({
           message: 'Bitte zuerst die Authentifizierungsdaten in den Einstellungen eingeben.',
           duration: 3000,
@@ -71,7 +92,7 @@ export class ErfassungPage {
             position: 'top'
           });
           toast.present();
-  
+
           this.storage.length().then((anzahl) => {
             this.storage.set((anzahl + 1).toString(), this.schaden);
           });
@@ -84,7 +105,7 @@ export class ErfassungPage {
           });
           toast.present();
         })
-  
+
       this.schaden = {};
       this.navCtrl.parent.select(2);
     });

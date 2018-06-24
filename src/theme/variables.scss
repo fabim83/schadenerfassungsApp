@@ -36,7 +36,7 @@ $app-direction: ltr;
 $colors: (
   primary:    #015740,
   secondary:  #3D6914,
-  danger:     #f53d3d,
+  danger:     #ea6153,
   light:      #f4f4f4,
   dark:       #222
 );
@@ -71,6 +71,9 @@ $colors: (
 // default are overridden.
 
 @import "ionic.theme.default";
+$text-input-highlight-color-invalid: #dedede;
+$text-input-highlight-color-valid: #dedede;
+
 
 
 // Ionicons
