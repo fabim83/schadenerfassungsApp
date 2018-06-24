@@ -48,32 +48,46 @@ export class ErfassungPage {
   }
 
   schadenErfassen() {
-    this.http.post('http://192.168.2.100:3000/schaden-anlegen', this.schaden, {
-      'Content-Type': 'application/json'
-    })
-      .then(data => {
+    this.storage.get('bestandskontonummer').then((val) => {
+      let bestandskontonummer = val;
+      if(!bestandskontonummer){
         let toast = this.toastCtrl.create({
-          message: 'Schaden erfolgreich erfasst.',
+          message: 'Bitte zuerst die Authentifizierungsdaten in den Einstellungen eingeben.',
           duration: 3000,
           position: 'top'
         });
         toast.present();
+        return;
+      }
 
-        this.storage.length().then((anzahl) => {
-          this.storage.set((anzahl + 1).toString(), this.schaden);
-        });
+      this.schaden["bestandskontonummer"] = bestandskontonummer;
+      this.http.post('http://192.168.2.100:3000/schaden-anlegen', this.schaden, {
+        'Content-Type': 'application/json'
       })
-      .catch(err => {
-        let toast = this.toastCtrl.create({
-          message: err.error,
-          duration: 20000,
-          position: 'top'
-        });
-        toast.present();
-      })
-
-    this.schaden = {};
-    this.navCtrl.parent.select(2);
+        .then(data => {
+          let toast = this.toastCtrl.create({
+            message: 'Schaden erfolgreich erfasst.',
+            duration: 3000,
+            position: 'top'
+          });
+          toast.present();
+  
+          this.storage.length().then((anzahl) => {
+            this.storage.set((anzahl + 1).toString(), this.schaden);
+          });
+        })
+        .catch(err => {
+          let toast = this.toastCtrl.create({
+            message: err.error,
+            duration: 20000,
+            position: 'top'
+          });
+          toast.present();
+        })
+  
+      this.schaden = {};
+      this.navCtrl.parent.select(2);
+    });
   }
 
   setzeSchadenarten(sachgebiet) {
