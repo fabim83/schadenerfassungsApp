@@ -5,7 +5,7 @@ import { UebersichtDetailsPage } from '../uebersicht-details/uebersicht-details'
 import { CacheService } from 'ionic-cache';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
-import { Http } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 
 @IonicPage()
 @Component({
@@ -16,7 +16,7 @@ export class UebersichtPage {
   schaeden: Observable<any>;
   cacheSchluessel = 'cache-uebersicht';
 
-  constructor(public navCtrl: NavController, private storage: Storage, private http: Http, private cache: CacheService, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, private storage: Storage, private http: HttpClient, private cache: CacheService, private toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
@@ -55,7 +55,7 @@ export class UebersichtPage {
             position: 'top'
           });
           toast.present();
-          return res.json();
+          return res;
         });
 
       if (refresher) {

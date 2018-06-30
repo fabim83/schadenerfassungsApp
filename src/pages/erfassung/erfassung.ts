@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { Storage } from "@ionic/storage";
-import { HTTP } from "@ionic-native/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @IonicPage()
@@ -13,12 +13,11 @@ export class ErfassungPage {
   sachgebiete = [];
   schadenarten = [];
   schadenmelder = [];
-  schaden = {};
 
   erfassungForm: FormGroup;
   submitAttempt: boolean = false;
 
-  constructor(public navCtrl: NavController, public storage: Storage, public formBuilder: FormBuilder, private toastCtrl: ToastController, private http: HTTP) {
+  constructor(public navCtrl: NavController, public storage: Storage, public formBuilder: FormBuilder, private toastCtrl: ToastController, private http: HttpClient) {
 
     this.erfassungForm = formBuilder.group({
       sachgebiet: ['', Validators.required],
@@ -62,6 +61,10 @@ export class ErfassungPage {
     });
   }
 
+  ionViewWillLeave(){
+    this.submitAttempt = false;
+  }
+
   schadenErfassen() {
     this.submitAttempt = true;
     if (!this.erfassungForm.valid) {
@@ -81,32 +84,38 @@ export class ErfassungPage {
         return;
       }
 
-      this.schaden["bestandskontonummer"] = bestandskontonummer;
-      this.http.post('http://192.168.2.100:3000/schaden-anlegen', this.schaden, {
-        'Content-Type': 'application/json'
-      })
-        .then(data => {
+      let schaden = this.erfassungForm.value;
+      schaden["bestandskontonummer"] = bestandskontonummer;
+      let url = 'http://192.168.2.100:3000/schaden-anlegen';
+      let httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json'
+        })
+      };
+
+      this.http.post(url, schaden, httpOptions)
+        .subscribe(data => {
           let toast = this.toastCtrl.create({
             message: 'Schaden erfolgreich erfasst.',
             duration: 3000,
             position: 'top'
           });
           toast.present();
-
-          this.storage.length().then((anzahl) => {
-            this.storage.set((anzahl + 1).toString(), this.schaden);
-          });
-        })
-        .catch(err => {
+        }, err => {
           let toast = this.toastCtrl.create({
-            message: err.error,
-            duration: 20000,
+            message: err.statusText,
+            duration: 3000,
             position: 'top'
           });
           toast.present();
-        })
+  
+          this.storage.length().then((anzahl) => {
+            this.storage.set((anzahl + 1).toString(), schaden);
+          });
+        });
 
-      this.schaden = {};
+      this.erfassungForm.reset();
+      this.submitAttempt = false;
       this.navCtrl.parent.select(2);
     });
   }
@@ -159,8 +168,6 @@ export class ErfassungPage {
         name: 'Einbruch-Diebstahl',
         id: 'ED'
       });
-
     }
   }
-
 }
