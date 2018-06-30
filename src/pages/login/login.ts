@@ -9,7 +9,7 @@ import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, private faio: FingerprintAIO, private platform: Platform) {
+  constructor(public navCtrl: NavController, private faio: FingerprintAIO) {
   }
 
   login() {
@@ -21,7 +21,7 @@ export class LoginPage {
       this.navCtrl.setRoot('TabsPage');
     })
     .catch(err => {
-      this.platform.exitApp();
+      console.log('Error Login: ', err);
     });
   }
 
