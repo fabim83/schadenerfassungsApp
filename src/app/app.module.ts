@@ -14,6 +14,8 @@ import { KontaktPage } from "../pages/kontakt/kontakt";
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 import { HTTP } from "@ionic-native/http";
 import { IonicStorageModule } from '@ionic/storage';
+import { CacheModule } from "ionic-cache";
+import { HttpModule } from "@angular/http";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -32,6 +34,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpModule,
+    CacheModule.forRoot(),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],

@@ -11,9 +11,10 @@
     <ion-refresher (ionRefresh)="refresh($event)">
       <ion-refresher-content refreshingText="Lade Übersicht..."></ion-refresher-content>
     </ion-refresher>
+
     <ion-list style="margin-top: 15px;margin-bottom: 15px">
-        <button ion-item *ngFor="let schaden of schaeden" (click)="schadenSelected(schaden)" color="primary">
-          {{ schaden.schadendatum }}
-        </button>  
+        <button ion-item *ngFor="let schaden of schaeden | async" (click)="schadenSelected(schaden)" color="primary">
+          {{ schaden.nameVN }} {{schaden.schadendatum}} (VNR: {{schaden.vertragsnummer}})
+        </button>
     </ion-list>
 </ion-content>
