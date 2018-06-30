@@ -14,7 +14,7 @@
 
     <ion-list style="margin-top: 15px;margin-bottom: 15px">
         <button ion-item *ngFor="let schaden of schaeden | async" (click)="schadenSelected(schaden)" color="primary">
-          {{ schaden.nameVN }} {{schaden.schadendatum}} (VNR: {{schaden.vertragsnummer}})
+          Name: {{ schaden.nameVN }} (Erfassung am: {{schaden.erfassungsdatum}})
         </button>
     </ion-list>
 </ion-content>

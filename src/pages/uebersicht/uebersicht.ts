@@ -39,7 +39,7 @@ export class UebersichtPage {
       if (!bestandskontonummer) {
         let toast = this.toastCtrl.create({
           message: 'Bitte zuerst die Authentifizierungsdaten in den Einstellungen eingeben.',
-          duration: 3000,
+          duration: 2000,
           position: 'top'
         });
         toast.present();

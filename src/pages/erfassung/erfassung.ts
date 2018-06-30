@@ -25,7 +25,7 @@ export class ErfassungPage {
       schadendatum: ['', Validators.required],
       schadenuhrzeit: ['', Validators.required],
       schadenmelder: ['', Validators.required],
-      vertragsnummer: ['', Validators.compose([Validators.minLength(10), Validators.maxLength(10), Validators.pattern('[0-9]*'), Validators.required])],
+      vertragsnummer: ['', Validators.compose([Validators.minLength(8), Validators.maxLength(8), Validators.pattern('[0-9]*'), Validators.required])],
       nameVN: ['', Validators.compose([Validators.pattern('[a-zA-Z]*'), Validators.required])],
       schadennotizen: ['']
     });
@@ -61,7 +61,7 @@ export class ErfassungPage {
     });
   }
 
-  ionViewWillLeave(){
+  ionViewWillLeave() {
     this.submitAttempt = false;
   }
 
@@ -86,10 +86,11 @@ export class ErfassungPage {
 
       let schaden = this.erfassungForm.value;
       schaden["bestandskontonummer"] = bestandskontonummer;
+      schaden["erfassungsdatum"] = this.ermittleTagesdatum();
       let url = 'http://192.168.2.100:3000/schaden-anlegen';
       let httpOptions = {
         headers: new HttpHeaders({
-          'Content-Type':  'application/json'
+          'Content-Type': 'application/json'
         })
       };
 
@@ -108,7 +109,7 @@ export class ErfassungPage {
             position: 'top'
           });
           toast.present();
-  
+
           this.storage.length().then((anzahl) => {
             this.storage.set((anzahl + 1).toString(), schaden);
           });
@@ -169,5 +170,13 @@ export class ErfassungPage {
         id: 'ED'
       });
     }
+  }
+
+  ermittleTagesdatum(): String {
+    let tagesdatum = new Date();
+    let jahr = tagesdatum.getFullYear();
+    let monat = (tagesdatum.getMonth() + 1) < 10 ? '0' + (tagesdatum.getMonth() + 1) : (tagesdatum.getMonth() + 1);
+    let tag = tagesdatum.getDate() < 10 ? '0' + tagesdatum.getDate() : tagesdatum.getDate();   
+    return jahr + '-' + monat + '-' + tag;
   }
 }

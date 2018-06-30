@@ -8,5 +8,49 @@
 
 
 <ion-content padding>
-  <ion-content color="primary">{{schaden.vertragsnummer}}</ion-content>
+    <div style="margin-top: 15px">
+        <h2 ion-text color="primary">Schadenübersicht</h2>
+      </div>
+      <ion-grid>
+          <ion-row>
+            <ion-col><b>Schadennummer:</b></ion-col>
+            <ion-col>{{schaden.schadennummer}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col><b>Sachgebiet:</b></ion-col>
+            <ion-col>{{schaden.sachgebiet}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col><b>Schadenart:</b></ion-col>
+            <ion-col>{{schaden.schadenart}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col><b>Schadendatum:</b></ion-col>
+            <ion-col>{{schaden.schadendatum}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col><b>Schadenuhrzeit:</b></ion-col>
+            <ion-col>{{schaden.schadenuhrzeit}} Uhr</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col><b>Erfassungsdatum:</b></ion-col>
+            <ion-col>{{schaden.erfassungsdatum}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col><b>Schadenmelder:</b></ion-col>
+            <ion-col>{{schaden.schadenmelder}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col><b>Vertragsnummer:</b></ion-col>
+            <ion-col>{{schaden.vertragsnummer}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col><b>Versicherungsnehmer:</b></ion-col>
+            <ion-col>{{schaden.nameVN}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col><b>Schadennotizen:</b></ion-col>
+            <ion-col>{{schaden.schadennotizen}}</ion-col>
+          </ion-row>
+      </ion-grid>
 </ion-content>
