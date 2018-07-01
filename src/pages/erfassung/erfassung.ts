@@ -87,6 +87,7 @@ export class ErfassungPage {
       let schaden = this.erfassungForm.value;
       schaden["bestandskontonummer"] = bestandskontonummer;
       schaden["erfassungsdatum"] = this.ermittleTagesdatum();
+      schaden["schadendatum"] = this.formatiereSchadendatum(schaden["schadendatum"]);
       let url = 'http://192.168.2.100:3000/schaden-anlegen';
       let httpOptions = {
         headers: new HttpHeaders({
@@ -177,6 +178,11 @@ export class ErfassungPage {
     let jahr = tagesdatum.getFullYear();
     let monat = (tagesdatum.getMonth() + 1) < 10 ? '0' + (tagesdatum.getMonth() + 1) : (tagesdatum.getMonth() + 1);
     let tag = tagesdatum.getDate() < 10 ? '0' + tagesdatum.getDate() : tagesdatum.getDate();   
-    return jahr + '-' + monat + '-' + tag;
+    return tag + '.' + monat + '.' + jahr;
+  }
+
+  formatiereSchadendatum(schadendatum: String): String {
+    let datum = schadendatum.split("-");
+    return datum[2] + '.' + datum[1] + '.' + datum[0];
   }
 }

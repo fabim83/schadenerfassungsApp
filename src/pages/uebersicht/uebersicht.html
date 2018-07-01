@@ -8,6 +8,8 @@
 
 
 <ion-content>
+    <ion-searchbar placeholder="Filter Schäden" (ionInput)="filterSchaeden($event)"></ion-searchbar>
+
     <ion-refresher (ionRefresh)="refresh($event)">
       <ion-refresher-content refreshingText="Lade Übersicht..."></ion-refresher-content>
     </ion-refresher>
