@@ -22,6 +22,7 @@ export class UebersichtPage {
 
   ionViewDidLoad() {
     this.ladeSchaeden()
+      .then()
       .catch(err => {
         this.zeigeFehler(err);
       });
@@ -35,6 +36,7 @@ export class UebersichtPage {
 
   refresh(refresher) {
     this.ladeSchaeden(refresher)
+      .then()
       .catch(err => {
         this.zeigeFehler(err);
       });
