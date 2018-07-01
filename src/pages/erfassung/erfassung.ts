@@ -32,32 +32,32 @@ export class ErfassungPage {
 
     this.sachgebiete.push({
       name: 'Kraftfahrt',
-      id: 'K'
+      id: 'Kraftfahrt'
     });
 
     this.sachgebiete.push({
       name: 'Sach',
-      id: 'S'
+      id: 'Sach'
     });
 
     this.sachgebiete.push({
       name: 'Haftpflicht',
-      id: 'H'
+      id: 'Haftplicht'
     });
 
     this.schadenmelder.push({
       name: 'Versicherungsnehmer',
-      id: 'VN'
+      id: 'Versicherungsnehmer'
     });
 
     this.schadenmelder.push({
       name: 'Anspruchsteller',
-      id: 'AS'
+      id: 'Anspruchsteller'
     });
 
     this.schadenmelder.push({
-      name: 'Sonstiges',
-      id: 'SO'
+      name: 'Sonstiger',
+      id: 'Sonstiger'
     });
   }
 
@@ -92,47 +92,47 @@ export class ErfassungPage {
     if (sachgebiet == 'H') {
       this.schadenarten.push({
         name: 'Haftpflicht-Personenschaden',
-        id: 'HP'
+        id: 'Haftpflicht-Personenschaden'
       });
 
       this.schadenarten.push({
         name: 'Haftpflicht-Sachschaden',
-        id: 'HS'
+        id: 'Haftpflicht-Sachschaden'
       });
 
       this.schadenarten.push({
         name: 'Haftpflicht-Vermögensschaden',
-        id: 'HV'
+        id: 'Haftpflicht-Vermögensschaden'
       });
     } else if (sachgebiet == 'K') {
       this.schadenarten.push({
         name: 'KH-Personenschaden',
-        id: 'KP'
+        id: 'KH-Personenschaden'
       });
 
       this.schadenarten.push({
         name: 'TK-Glasschaden',
-        id: 'TG'
+        id: 'TK-Glasschaden'
       });
 
       this.schadenarten.push({
         name: 'TK-Tierbiss',
-        id: 'TT'
+        id: 'TK-Tierbiss'
       });
     } else if (sachgebiet == 'S') {
       this.schadenarten.push({
         name: 'Leitungswasser',
-        id: 'LW'
+        id: 'Leitungswasser'
       });
 
       this.schadenarten.push({
         name: 'Feuer',
-        id: 'FE'
+        id: 'Feuer'
       });
 
       this.schadenarten.push({
         name: 'Einbruch-Diebstahl',
-        id: 'ED'
+        id: 'Einbruch-Diebstahl'
       });
     }
   }
