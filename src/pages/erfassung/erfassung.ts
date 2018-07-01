@@ -89,7 +89,7 @@ export class ErfassungPage {
   setzeSchadenarten(sachgebiet) {
     this.schadenarten = [];
 
-    if (sachgebiet == 'H') {
+    if (sachgebiet == 'Haftplicht') {
       this.schadenarten.push({
         name: 'Haftpflicht-Personenschaden',
         id: 'Haftpflicht-Personenschaden'
@@ -104,7 +104,7 @@ export class ErfassungPage {
         name: 'Haftpflicht-Vermögensschaden',
         id: 'Haftpflicht-Vermögensschaden'
       });
-    } else if (sachgebiet == 'K') {
+    } else if (sachgebiet == 'Kraftfahrt') {
       this.schadenarten.push({
         name: 'KH-Personenschaden',
         id: 'KH-Personenschaden'
@@ -119,7 +119,7 @@ export class ErfassungPage {
         name: 'TK-Tierbiss',
         id: 'TK-Tierbiss'
       });
-    } else if (sachgebiet == 'S') {
+    } else if (sachgebiet == 'Sach') {
       this.schadenarten.push({
         name: 'Leitungswasser',
         id: 'Leitungswasser'
