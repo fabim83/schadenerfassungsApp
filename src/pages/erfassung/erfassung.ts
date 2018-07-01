@@ -72,54 +72,18 @@ export class ErfassungPage {
       return;
     }
 
-    this.storage.get('bestandskontonummer').then((val) => {
-      let bestandskontonummer = val;
-      if (!bestandskontonummer) {
-        let toast = this.toastCtrl.create({
-          message: 'Bitte zuerst die Authentifizierungsdaten in den Einstellungen eingeben.',
-          duration: 3000,
-          position: 'top'
-        });
-        toast.present();
-        return;
-      }
-
-      let schaden = this.erfassungForm.value;
-      schaden["bestandskontonummer"] = bestandskontonummer;
-      schaden["erfassungsdatum"] = this.ermittleTagesdatum();
-      schaden["schadendatum"] = this.formatiereSchadendatum(schaden["schadendatum"]);
-      let url = 'http://192.168.2.100:3000/schaden-anlegen';
-      let httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-        })
-      };
-
-      this.http.post(url, schaden, httpOptions)
-        .subscribe(data => {
-          let toast = this.toastCtrl.create({
-            message: 'Schaden erfolgreich erfasst.',
-            duration: 3000,
-            position: 'top'
-          });
-          toast.present();
-        }, err => {
-          let toast = this.toastCtrl.create({
-            message: err.statusText,
-            duration: 3000,
-            position: 'top'
-          });
-          toast.present();
-
-          this.storage.length().then((anzahl) => {
-            this.storage.set((anzahl + 1).toString(), schaden);
-          });
-        });
-
-      this.erfassungForm.reset();
-      this.submitAttempt = false;
-      this.navCtrl.parent.select(2);
-    });
+    this.holeBestandskontonummer()
+    .then(nummer => {
+      this.schadenErfassenInternal(nummer);
+    })
+    .catch(err => {
+      let toast = this.toastCtrl.create({
+        message: err,
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    })
   }
 
   setzeSchadenarten(sachgebiet) {
@@ -173,15 +137,65 @@ export class ErfassungPage {
     }
   }
 
-  ermittleTagesdatum(): String {
+  private schadenErfassenInternal(nummer: {}) {
+    let schaden = this.erfassungForm.value;
+    schaden["bestandskontonummer"] = nummer;
+    schaden["erfassungsdatum"] = this.ermittleTagesdatum();
+    schaden["schadendatum"] = this.formatiereSchadendatum(schaden["schadendatum"]);
+    let url = 'http://192.168.2.100:3000/schaden-anlegen';
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    this.http.post(url, schaden, httpOptions)
+      .subscribe(data => {
+        let toast = this.toastCtrl.create({
+          message: 'Schaden erfolgreich erfasst.',
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      }, err => {
+        let toast = this.toastCtrl.create({
+          message: err.statusText,
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+
+        this.storage.length().then((anzahl) => {
+          this.storage.set('Schaden ' + (anzahl + 1).toString(), schaden);
+        });
+      });
+
+    this.erfassungForm.reset();
+    this.submitAttempt = false;
+    this.navCtrl.parent.select(2);
+  }
+
+  private holeBestandskontonummer() {
+    return new Promise((resolve, reject) => {
+      this.storage.get('bestandskontonummer').then((val) => {
+        if (val) {
+          resolve(val);
+        } else {
+          reject('Bitte zuerst die Authentifizierungsdaten in den Einstellungen eingeben.');
+        }
+      });
+    });
+  }
+
+  private ermittleTagesdatum(): String {
     let tagesdatum = new Date();
     let jahr = tagesdatum.getFullYear();
     let monat = (tagesdatum.getMonth() + 1) < 10 ? '0' + (tagesdatum.getMonth() + 1) : (tagesdatum.getMonth() + 1);
-    let tag = tagesdatum.getDate() < 10 ? '0' + tagesdatum.getDate() : tagesdatum.getDate();   
+    let tag = tagesdatum.getDate() < 10 ? '0' + tagesdatum.getDate() : tagesdatum.getDate();
     return tag + '.' + monat + '.' + jahr;
   }
 
-  formatiereSchadendatum(schadendatum: String): String {
+  private formatiereSchadendatum(schadendatum: String): String {
     let datum = schadendatum.split("-");
     return datum[2] + '.' + datum[1] + '.' + datum[0];
   }
