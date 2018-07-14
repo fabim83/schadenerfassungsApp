@@ -71,7 +71,7 @@ export class UebersichtPage {
   }
 
   private ladeSchaedenInternal(nummer: {}, refresher: any, resolve: (value?: {} | PromiseLike<{}>) => void) {
-    let url = 'http://192.168.2.100:3000/schaeden-lesen?bestandskontonummer=' + nummer;
+    let url = 'http://localhost:3000/schaeden-lesen?bestandskontonummer=' + nummer;
     let req = this.http.get(url)
       .map(res => {
         let toast = this.toastCtrl.create({

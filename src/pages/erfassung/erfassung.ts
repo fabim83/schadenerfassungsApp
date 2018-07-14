@@ -142,7 +142,7 @@ export class ErfassungPage {
     schaden["bestandskontonummer"] = nummer;
     schaden["erfassungsdatum"] = this.ermittleTagesdatum();
     schaden["schadendatum"] = this.formatiereSchadendatum(schaden["schadendatum"]);
-    let url = 'http://192.168.2.100:3000/schaden-anlegen';
+    let url = 'http://localhost:3000/schaden-anlegen';
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
